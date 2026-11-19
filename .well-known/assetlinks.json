@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sailornote.app",
+      "sha256_cert_fingerprints": [
+        "C8:3F:CC:D1:77:B9:35:C1:2D:D6:E9:69:61:98:A9:F2:AB:F8:7F:24:B5:09:01:9C:60:68:59:83:C5:DE:8D:6E"
+      ]
+    }
+  }
+]

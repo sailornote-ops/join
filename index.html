@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SailOrNote — dołącz do rejsu</title>
+<meta property="og:title" content="Dołącz do rejsu w SailOrNote">
+<meta property="og:description" content="Otwórz link na telefonie z Androidem, aby dołączyć do rejsu.">
+<meta name="robots" content="noindex">
+<style>
+  :root { --bg:#f5f7fa; --card:#fff; --ink:#0f2236; --ink2:#55657a; --primary:#0b5cad; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0d1520; --card:#162232; --ink:#e8eef5; --ink2:#9fb0c3; --primary:#5ea8f2; } }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui, sans-serif; display:flex; min-height:100vh; align-items:center; justify-content:center; }
+  main { background:var(--card); max-width:420px; width:calc(100% - 32px); padding:28px 24px; border-radius:16px; box-sizing:border-box; text-align:center; }
+  h1 { font-size:22px; margin:0 0 8px; }
+  p { color:var(--ink2); margin:8px 0; }
+  .code { font:600 32px/1.2 ui-monospace, monospace; letter-spacing:6px; margin:20px 0; color:var(--ink); }
+  a.btn { display:inline-block; margin-top:16px; padding:12px 20px; border-radius:24px; background:var(--primary); color:#fff; text-decoration:none; font-weight:600; }
+  [hidden] { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <h1 data-pl="Dołącz do rejsu" data-en="Join the voyage">Dołącz do rejsu</h1>
+  <p data-pl="Otwórz ten link na telefonie z zainstalowaną aplikacją SailOrNote — przeniesie Cię prosto do dołączania." data-en="Open this link on a phone with SailOrNote installed — it takes you straight to joining.">Otwórz ten link na telefonie z zainstalowaną aplikacją SailOrNote — przeniesie Cię prosto do dołączania.</p>
+  <div id="withcode" hidden>
+    <p data-pl="Nie masz aplikacji? Zainstaluj ją i wpisz kod rejsu:" data-en="No app yet? Install it and enter the voyage code:">Nie masz aplikacji? Zainstaluj ją i wpisz kod rejsu:</p>
+    <div class="code" id="code"></div>
+  </div>
+  <a class="btn" href="https://play.google.com/store/apps/details?id=com.sailornote.app" data-pl="Pobierz z Google Play" data-en="Get it on Google Play">Pobierz z Google Play</a>
+</main>
+<script>
+  var en = !/^pl\b/i.test(navigator.language || "");
+  if (en) { document.documentElement.lang = "en"; document.querySelectorAll("[data-en]").forEach(function (e) { e.textContent = e.getAttribute("data-en"); }); document.title = "SailOrNote — join the voyage"; }
+  var code = (location.pathname.split("/").filter(Boolean)[0] || "").toUpperCase();
+  if (/^[A-Z2-9]{6}$/.test(code)) { document.getElementById("code").textContent = code; document.getElementById("withcode").hidden = false; }
+</script>
+</body>
+</html>
