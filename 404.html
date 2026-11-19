@@ -17,6 +17,9 @@
   .code { font:600 32px/1.2 ui-monospace, monospace; letter-spacing:6px; margin:20px 0; color:var(--ink); }
   a.btn { display:inline-block; margin-top:16px; padding:12px 20px; border-radius:24px; background:var(--primary); color:#fff; text-decoration:none; font-weight:600; }
   [hidden] { display:none; }
+  .lang { margin-top:20px; font-size:14px; }
+  .lang button { background:none; border:0; color:var(--ink2); font:inherit; cursor:pointer; padding:4px 8px; }
+  .lang button[aria-pressed="true"] { color:var(--primary); font-weight:600; }
 </style>
 </head>
 <body>
@@ -28,10 +31,18 @@
     <div class="code" id="code"></div>
   </div>
   <a class="btn" href="https://play.google.com/store/apps/details?id=com.sailornote.app" data-pl="Pobierz z Google Play" data-en="Get it on Google Play">Pobierz z Google Play</a>
+  <div class="lang"><button type="button" data-lang="pl">Polski</button> · <button type="button" data-lang="en">English</button></div>
 </main>
 <script>
-  var en = !/^pl\b/i.test(navigator.language || "");
-  if (en) { document.documentElement.lang = "en"; document.querySelectorAll("[data-en]").forEach(function (e) { e.textContent = e.getAttribute("data-en"); }); document.title = "SailOrNote — join the voyage"; }
+  var TITLES = { pl: "SailOrNote — dołącz do rejsu", en: "SailOrNote — join the voyage" };
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-" + lang + "]").forEach(function (e) { e.textContent = e.getAttribute("data-" + lang); });
+    document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
+    document.title = TITLES[lang];
+  }
+  document.querySelectorAll("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); }); });
+  setLang(/^pl\b/i.test(navigator.language || "") ? "pl" : "en");
   var code = (location.pathname.split("/").filter(Boolean)[0] || "").toUpperCase();
   if (/^[A-Z2-9]{6}$/.test(code)) { document.getElementById("code").textContent = code; document.getElementById("withcode").hidden = false; }
 </script>
